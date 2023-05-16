@@ -1,14 +1,103 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Tasks</h1>
-
-<div id="tasks">
-  <% @tasks.each do |task| %>
-    <%= render task %>
-    <p>
-      <%= link_to "Show this task", task %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New task", new_task_path %>
+<section class="py-5 mt-5" style="text-align: center;">
+        <h2 class="display-3 fw-bold mb-4" style="text-align: center;">My Tasks</h2><img class="img-fluid" src="illustrations/video-call.svg" style="width: 600px;" width="800" height="603" /><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal-1" style="margin-right: 18px;">Add Task</button><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal-2">Add Label</button>
+        <div class="filter">
+            <form><input placeholder="e.g For Review" /><br /><select>
+                    <option value>Task Status</option>
+                </select><select>
+                    <option value>Label</option>
+                    <option value>Label2</option>
+                    <option value>Labe3</option>
+                </select><select>
+                    <option value>Deadline</option>
+                </select><select>
+                    <option value>Role</option>
+                    <option value>Task Leader</option>
+                    <option value>Group Leader</option>
+                </select></form>
+        </div>
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 350px;">Action</th>
+                            <th>Task Name</th>
+                            <th>Status</th>
+                            <th>Label</th>
+                            <th>Assignee</th>
+                            <th>Deadline</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="btn-group" role="group"><a class="btn btn-primary" role="button" style="background: rgb(90,135,92);border-style: none;" href="super_user_tasks_show.html">Edit</a><button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;border-color: rgba(255,255,255,0);">Delete</button></div>
+                            </td>
+                            <td>Work on Concept</td>
+                            <td>
+                                <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="background: #f5f6f8;color: rgb(0,0,0);">To-do </button>
+                                    <div class="dropdown-menu"><a class="dropdown-item" href="#" style="background: #ffd200;">In Progress</a><a class="dropdown-item" href="#" style="background: #9acff5;">For Review</a><a class="dropdown-item" href="#" style="background: #92de95;">Done</a></div>
+                                </div>
+                            </td>
+                            <td>CE</td>
+                            <td>Juan Dela Cruz</td>
+                            <td>Cell 3</td>
+                        </tr>
+                        <tr>
+                            <td><button class="btn btn-primary" type="button" style="background: rgb(90,135,92);border-style: none;">Edit</button><button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;">Delete</button></td>
+                            <td>Draw Diagrams</td>
+                            <td>
+                                <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="background: #f5f6f8;color: rgb(0,0,0);">To-do </button>
+                                    <div class="dropdown-menu"><a class="dropdown-item" href="#" style="background: #ffd200;">In Progress</a><a class="dropdown-item" href="#" style="background: #9acff5;">For Review</a><a class="dropdown-item" href="#" style="background: #92de95;">Done</a></div>
+                                </div>
+                            </td>
+                            <td>DE</td>
+                            <td>John Doe</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="modal-1" class="modal fade" role="dialog" tabindex="-1" style="position: fixed;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Enter Task Details</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" style="text-align: left;"><label class="form-label" style="font-weight: bold;">Task name:</label>
+                        <form><input class="form-control" type="text" /></form><label class="form-label" style="font-weight: bold;">Task description:</label>
+                        <form><input class="form-control" type="text" /></form><label class="form-label" style="font-weight: bold;">Task label:</label>
+                        <form><select class="form-select">
+                                <optgroup label="This is a group">
+                                    <option value="12" selected>This is item 1</option>
+                                    <option value="13">This is item 2</option>
+                                    <option value="14">This is item 3</option>
+                                </optgroup>
+                            </select></form><label class="form-label" style="font-weight: bold;">Assignee</label>
+                        <form><select class="form-select">
+                                <optgroup label="This is a group">
+                                    <option value="12" selected>This is item 1</option>
+                                    <option value="13">This is item 2</option>
+                                    <option value="14">This is item 3</option>
+                                </optgroup>
+                            </select></form><label class="form-label" style="font-weight: bold;">Deadline</label>
+                        <form><input class="form-control" type="date" /></form>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Save</button></div>
+                </div>
+            </div>
+        </div>
+        <div id="modal-2" class="modal fade" role="dialog" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New Label</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" style="text-align: left;"><label class="form-label" style="font-weight: bold;">Label Tag</label>
+                        <form><input class="form-control" type="text" /></form>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Save</button></div>
+                </div>
+            </div>
+        </div>
+    </section>

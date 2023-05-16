@@ -1,10 +1,42 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @task %>
-
-<div>
-  <%= link_to "Edit this task", edit_task_path(@task) %> |
-  <%= link_to "Back to tasks", tasks_path %>
-
-  <%= button_to "Destroy this task", @task, method: :delete %>
-</div>
+    
+    <section class="py-5 mt-5" style="text-align: center;">
+        <h2 class="display-3 fw-bold mb-4" style="text-align: center;">Task name</h2>
+        <div class="row" style="text-align: center;">
+            <div class="col" style="text-align: right;width: 600px;"><img class="img-fluid" src="illustrations/video-call.svg" style="width: 500px;" width="800" height="603" /></div>
+            <div class="col">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 style="text-align: left;font-size: 20px;"><strong>Description</strong>: </h1>
+                            <h1 style="text-align: left;font-size: 20px;"><strong>Label</strong>:</h1>
+                            <h1 style="text-align: left;font-size: 20px;"><strong>Deadline</strong>:</h1>
+                            <h1 style="text-align: left;font-size: 20px;"><strong>Overdue</strong>:</h1>
+                            <h1 style="text-align: left;font-size: 20px;"><strong>Status</strong>:</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 style="text-align: left;font-size: 20px;"><strong>Task Update</strong>: <br /><br /><br /><br /><br /></h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 style="text-align: left;font-size: 20px;"><strong>Task Comments:</strong><br /><br /><br /><br /><br /><br /></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12"><textarea style="height: 100px;width: 500px;"></textarea></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12"><a class="btn btn-primary" role="button" href="super_user_tasks_index.html">Add Comment</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-group" role="group"></div>
+    </section>
+    
