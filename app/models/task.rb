@@ -10,5 +10,10 @@ class Task < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
 
-  # Other methods and logic for the Task model can be defined here
+  def notify_deadline
+    if due_date.present? && (due_date - Date.today).to_i <= 3
+      # Enqueue a background job to handle the notification
+      DeadlineNotificationJob.perform_later(self)
+    end
+  end
 end
