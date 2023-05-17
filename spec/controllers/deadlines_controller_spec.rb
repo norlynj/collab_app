@@ -44,6 +44,4 @@ RSpec.describe DeadlinesController, type: :controller do
       end
     end
   end
-
-  # Other controller actions tests
 end
