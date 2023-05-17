@@ -3,7 +3,7 @@ class UpdateLog < ApplicationRecord
   belongs_to :user
 
   # Validations
-  validates :description, presence: true
+  validates :note, presence: true
 
   # Other methods and logic for the UpdateLog model can be defined here
 end

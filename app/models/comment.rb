@@ -3,7 +3,7 @@ class Comment < ApplicationRecord
   belongs_to :task
 
   # Validations
-  validates :content, presence: true
+  validates :note, presence: true
 
   # Other methods and logic for the Comment model can be defined here
 end

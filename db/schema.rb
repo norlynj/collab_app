@@ -30,18 +30,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_024500) do
   create_table "labels", force: :cascade do |t|
     t.string "tag"
     t.string "string"
-    t.integer "task_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["task_id"], name: "index_labels_on_task_id"
   end
 
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.string "status"
     t.string "description"
+    t.integer "label_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["label_id"], name: "index_tasks_on_label_id"
   end
 
   create_table "update_logs", force: :cascade do |t|
@@ -69,6 +69,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_024500) do
 
   add_foreign_key "comments", "tasks"
   add_foreign_key "deadlines", "tasks"
-  add_foreign_key "labels", "tasks"
+  add_foreign_key "tasks", "labels"
   add_foreign_key "update_logs", "tasks"
 end
