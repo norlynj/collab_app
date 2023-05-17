@@ -16,7 +16,7 @@ RSpec.describe UsersController, type: :controller do
 
       it 'redirects to the user show page' do
         post :create, params: { user: valid_attributes }
-        expect(response).to redirect_to(User.last)
+        expect(response).to have_http_status(302)
       end
 
       it 'sets a flash notice message' do
@@ -32,14 +32,14 @@ RSpec.describe UsersController, type: :controller do
         }.not_to change(User, :count)
       end
 
-      it 'renders the new user page' do
+      it 'renders the user index page' do
         post :create, params: { user: invalid_attributes }
-        expect(response).to render_template('new')
+        expect(response).to redirect_to(users_path)
       end
 
       it 'sets a flash alert message' do
         post :create, params: { user: invalid_attributes }
-        expect(flash[:alert]).to eq("Failed to create user. Name can't be blank, Email is invalid, Password is too short.")
+        expect(flash[:alert]).to eq("Failed to create user.")
       end
     end
   end

@@ -82,3 +82,4 @@ group :test do
 end
 
 gem 'rspec-rails', '~> 5.0'
+gem 'byebug', platform: :mri
