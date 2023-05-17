@@ -10,9 +10,9 @@ class User < ApplicationRecord
   has_many :update_logs
 
   # Validations
-  validates :username, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { minimum: 6 }
 
-  # Other methods and logic for the User model can be defined here
+  enum role: { group_leader: 'group_leader', task_leader: 'task_leader', member: 'member' }
 end
