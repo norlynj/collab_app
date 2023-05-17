@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     else
       # Handle validation errors
       flash.now[:alert] = 'Failed to create user.'
-      render 'new'
+      redirect_to users_path
     end
   end
 
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     else
       # Handle validation errors
       flash.now[:alert] = 'Failed to update user.'
-      render 'edit'
+      redirect_to users_path
     end
   end
 
@@ -28,6 +28,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :password)
   end
 end
