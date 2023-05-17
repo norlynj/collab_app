@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include BCrypt
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -14,5 +15,19 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { minimum: 6 }
 
+  attr_accessor :password
+
+  before_save :encrypt_password
+
+
   enum role: { group_leader: 'group_leader', task_leader: 'task_leader', member: 'member' }
+
+  def encrypt_password
+    self.password_digest = Password.create(password)
+  end
+
+  def authenticate(password)
+    Password.new(password_digest) == password
+  end
 end
+

@@ -84,3 +84,5 @@ end
 
 gem 'rspec-rails', '~> 5.0'
 gem 'byebug', platform: :mri
+gem 'bcrypt', '~> 3.1.7'
+
