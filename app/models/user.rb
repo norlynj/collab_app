@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :tasks
   has_many :comments
   has_many :update_logs
+  has_many :assigned_tasks, through: :assignments, source: :task
+  has_many :update_logs
 
   # Validations
   validates :username, presence: true, uniqueness: true
