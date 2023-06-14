@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>my_tasks - Collab</title>
-  <meta name="description" content="Task Management System for Groups" />
+  !-- The title of the webpage -->
+    <title>my_tasks - Collab</title>
+    <!-- Meta description for SEO -->
+    <meta name="description" content="Task Management System for Groups" />
+    <!-- Viewport settings for responsive design -->
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    <!-- Cross-Site Request Forgery (CSRF) meta tags -->
     <%= csrf_meta_tags %>
+    
+    <!-- Content Security Policy (CSP) meta tag -->
     <%= csp_meta_tag %>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Stylesheets -->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <!-- JavaScript import map tags -->
     <%= javascript_importmap_tags %>
   </head>
 
