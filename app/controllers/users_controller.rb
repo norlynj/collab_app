@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+
+  # creates user using the permitted params
   def create
     @user = User.new(user_params)
     if @user.save
@@ -11,6 +13,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # update user using the id
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -23,8 +26,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # Other controller actions
-
+ # Permits the name, email, and password parameters for user creation and update
   private
 
   def user_params

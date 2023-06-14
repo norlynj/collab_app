@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
+
+  # Creates a new task
   def create
     @task = Task.new(task_params)
     if @task.save
@@ -12,6 +14,7 @@ class TasksController < ApplicationController
     end
   end
 
+  # Updates an existing task
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
@@ -24,10 +27,9 @@ class TasksController < ApplicationController
     end
   end
 
-  # Other controller actions
-
   private
 
+  # Permits the title and description parameters for task creation and update
   def task_params
     params.require(:task).permit(:title, :description)
   end

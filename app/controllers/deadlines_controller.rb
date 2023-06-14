@@ -1,5 +1,7 @@
 class DeadlinesController < ApplicationController
   before_action :authenticate_user
+
+  # Creates a new deadline for a task
   def create
     @task = Task.find(params[:task_id])
     @deadline = @task.build_deadline(deadline_params)
@@ -13,6 +15,7 @@ class DeadlinesController < ApplicationController
     end
   end
 
+  # Updates an existing deadline
   def update
     @deadline = Deadline.find(params[:id])
     if @deadline.update(deadline_params)
@@ -25,10 +28,9 @@ class DeadlinesController < ApplicationController
     end
   end
 
-  # Other controller actions
-
   private
 
+  # Permits the date parameter for deadline creation and update
   def deadline_params
     params.require(:deadline).permit(:date)
   end

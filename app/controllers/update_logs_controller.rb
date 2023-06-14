@@ -1,4 +1,5 @@
 class UpdateLogsController < ApplicationController
+  # create an update log for a specific task
   def create
     @task = Task.find(params[:task_id])
     @update_log = @task.update_logs.build(update_log_params)
@@ -24,10 +25,9 @@ class UpdateLogsController < ApplicationController
     end
   end
 
-  # Other controller actions
-
   private
 
+  # Permits the content parameter for update log creation and update
   def update_log_params
     params.require(:update_log).permit(:content)
   end

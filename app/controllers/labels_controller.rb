@@ -1,6 +1,7 @@
 class LabelsController < ApplicationController
   before_action :authenticate_user
 
+  # Creates a new label for a task
   def create
     @task = Task.find(params[:task_id])
     @label = @task.labels.build(label_params)
@@ -14,6 +15,7 @@ class LabelsController < ApplicationController
     end
   end
 
+  # Updates an existing label
   def update
     @label = Label.find(params[:id])
     if @label.update(label_params)
@@ -26,10 +28,9 @@ class LabelsController < ApplicationController
     end
   end
 
-  # Other controller actions
-
   private
 
+  # Permits the name parameter for label creation and update
   def label_params
     params.require(:label).permit(:name)
   end
