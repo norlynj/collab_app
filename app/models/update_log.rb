@@ -5,5 +5,15 @@ class UpdateLog < ApplicationRecord
   # Validations
   validates :note, presence: true
 
-  # Other methods and logic for the UpdateLog model can be defined here
+  def self.find_logs_by_task(task)
+    where(task: task)
+  end
+
+  def self.find_logs_by_user(user)
+    where(user: user)
+  end
+
+  def self.find_logs_by_task(task)
+    where(task: task)
+  end
 end

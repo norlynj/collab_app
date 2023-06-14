@@ -29,5 +29,40 @@ class User < ApplicationRecord
   def authenticate(password)
     Password.new(password_digest) == password
   end
+
+  def create_user_with_credentials(name, email)
+    password = generate_password
+    create(name: name, email: email, password: password)
+    password
+  end
+
+  def generate_password
+    SecureRandom.alphanumeric(8)
+  end
+
+  def update_user_information(name, email, role, label)
+    update(name: name, email: email, role: role, label: label)
+  end
+
+  def assign_task(task)
+    assigned_tasks << task
+  end
+
+  def add_comment(task, note)
+    comments.create(task: task, note: note)
+  end
+
+  def assigned_tasks_by_label(label)
+    assigned_tasks.joins(:label).where(labels: { tag: label })
+  end
+
+  def assigned_tasks_by_status(status)
+    assigned_tasks.where(status: status)
+  end
+
+  def add_update_log(task, note)
+    update_logs.create(task: task, note: note)
+  end
+
 end
 

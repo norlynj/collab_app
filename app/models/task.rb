@@ -16,4 +16,33 @@ class Task < ApplicationRecord
       DeadlineNotificationJob.perform_later(self)
     end
   end
+
+  def update_status(status)
+    update(status: status)
+  end
+
+  def update_name_description(name, description)
+    update(name: name, description: description)
+  end
+
+  def assign_member(member)
+    assigned_users << member
+  end
+
+  def add_comment(user, note)
+    comments.create(user: user, note: note)
+  end
+
+  def add_update_log(user, note)
+    update_logs.create(user: user, note: note)
+  end
+
+  def comments_by_user(user)
+    comments.where(user: user)
+  end
+
+  def update_status!(status)
+    update!(status: status)
+    add_update_log("Task status updated to #{status}.")
+  end
 end

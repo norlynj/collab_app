@@ -4,5 +4,7 @@ class Deadline < ApplicationRecord
   # Validations
   validates :date, presence: true
 
-  # Other methods and logic for the Deadline model can be defined here
+  def self.find_due_soon(deadline_limit)
+    where("date <= ?", deadline_limit)
+  end
 end

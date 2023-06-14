@@ -5,5 +5,7 @@ class Comment < ApplicationRecord
   # Validations
   validates :note, presence: true
 
-  # Other methods and logic for the Comment model can be defined here
+  def self.find_comments_by_user(user)
+    where(user: user)
+  end
 end
