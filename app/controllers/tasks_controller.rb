@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user!
   def create
     @task = Task.new(task_params)
     if @task.save
