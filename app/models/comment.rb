@@ -5,6 +5,7 @@ class Comment < ApplicationRecord
   # Validations
   validates :note, presence: true
 
+  # Returns comments associated with a specific user
   def self.find_comments_by_user(user)
     where(user: user)
   end
