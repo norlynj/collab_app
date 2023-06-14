@@ -4,6 +4,7 @@ class Deadline < ApplicationRecord
   # Validations
   validates :date, presence: true
 
+  # Returns deadlines that are due soon, based on the provided deadline limit
   def self.find_due_soon(deadline_limit)
     where("date <= ?", deadline_limit)
   end
