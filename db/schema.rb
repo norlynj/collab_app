@@ -14,9 +14,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_010543) do
   create_table "comments", force: :cascade do |t|
     t.text "note"
     t.integer "task_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_comments_on_task_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "deadlines", force: :cascade do |t|
@@ -39,9 +41,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_010543) do
     t.string "status"
     t.string "description"
     t.integer "label_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["label_id"], name: "index_tasks_on_label_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "update_logs", force: :cascade do |t|
@@ -67,7 +71,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_010543) do
   end
 
   add_foreign_key "comments", "tasks"
+  add_foreign_key "comments", "users"
   add_foreign_key "deadlines", "tasks"
   add_foreign_key "tasks", "labels"
+  add_foreign_key "tasks", "users"
   add_foreign_key "update_logs", "tasks"
 end

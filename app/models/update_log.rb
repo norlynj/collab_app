@@ -1,6 +1,5 @@
 class UpdateLog < ApplicationRecord
   belongs_to :task
-  belongs_to :user
 
   # Validations
   validates :note, presence: true

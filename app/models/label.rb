@@ -1,5 +1,5 @@
 class Label < ApplicationRecord
-
+  has_many :tasks
   # Validations
   validates :tag, presence: true, uniqueness: true
 
