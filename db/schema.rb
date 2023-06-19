@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_17_052205) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_17_010543) do
   create_table "comments", force: :cascade do |t|
     t.text "note"
     t.integer "task_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_comments_on_task_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "deadlines", force: :cascade do |t|
@@ -29,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_052205) do
 
   create_table "labels", force: :cascade do |t|
     t.string "tag"
-    t.string "string"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,9 +41,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_052205) do
     t.string "status"
     t.string "description"
     t.integer "label_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["label_id"], name: "index_tasks_on_label_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "update_logs", force: :cascade do |t|
@@ -63,13 +67,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_052205) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "role"
-    t.string "password_digest"
-    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "comments", "tasks"
+  add_foreign_key "comments", "users"
   add_foreign_key "deadlines", "tasks"
   add_foreign_key "tasks", "labels"
+  add_foreign_key "tasks", "users"
   add_foreign_key "update_logs", "tasks"
 end
