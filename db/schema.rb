@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_010543) do
     t.string "name"
     t.string "email"
     t.string "password"
+    t.integer "label_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "encrypted_password", default: "", null: false
@@ -67,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_010543) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "role"
+    t.index ["label_id"], name: "index_users_on_label_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -76,4 +78,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_010543) do
   add_foreign_key "tasks", "labels"
   add_foreign_key "tasks", "users"
   add_foreign_key "update_logs", "tasks"
+  add_foreign_key "users", "labels"
 end
