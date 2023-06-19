@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_010543) do
 
   create_table "labels", force: :cascade do |t|
     t.string "tag"
-    t.string "string"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
