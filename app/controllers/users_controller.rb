@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-
+  before_action :authenticate_user!, except: :create
   def index
     @users = User.all
+    @labels = Label.all
   end
 
   # creates user using the permitted params
@@ -9,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       # Handle successful user creation
-      redirect_to @user, notice: 'User was successfully created.'
+      redirect_to users_path, notice: 'User was successfully created.'
     else
       # Handle validation errors
       flash.now[:alert] = 'Failed to create user.'
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       # Handle successful user update
-      redirect_to @user, notice: 'User was successfully updated.'
+      redirect_to users_path, notice: 'User was successfully updated.'
     else
       # Handle validation errors
       flash.now[:alert] = 'Failed to update user.'
@@ -34,6 +35,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email, :password, :authenticity_token)
   end
 end

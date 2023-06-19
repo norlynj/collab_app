@@ -1,116 +1,137 @@
 <section class="py-5 mt-5" style="text-align: center;">
-        <h2 class="display-3 fw-bold mb-4" style="text-align: center;">My Tasks</h2>
-        <%= image_tag('illustrations/video-call.svg', class: "img-fluid", style: "width: 600;")  %>
-        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal-1" style="margin-right: 18px;">Add Task</button><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal-2">Add Label</button>
-        <div class="filter">
-            <form><input placeholder="e.g For Review" /><br /><select>
-                    <option value>Task Status</option>
-                </select><select>
-                    <option value>Label</option>
-                    <option value>Label2</option>
-                    <option value>Labe3</option>
-                </select><select>
-                    <option value>Deadline</option>
-                </select><select>
-                    <option value>Role</option>
-                    <option value>Task Leader</option>
-                    <option value>Group Leader</option>
-                </select></form>
-        </div>
-        <div class="container">
-            <div class="table-responsive">
-            <table class="table">
-            <thead>
-              <tr>
-                <th style="width: 350px;">Action</th>
-                <th>Task Name</th>
-                <th>Status</th>
-                <th>Label</th>
-                <th>Assignee</th>
-                <th>Deadline</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @tasks.each do |task| %>
-                <tr>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-primary" role="button" style="background: rgb(90,135,92);border-style: none;" href="super_user_tasks_show.html">Edit</a>
-                      <button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;border-color: rgba(255,255,255,0);">Delete</button>
-                    </div>
-                  </td>
-                  <td><%= link_to task.title, task_path(task.id), style: "text-decoration: none; color: inherit;"  %></td>
-                  <td>
-                    <div class="dropdown">
-                      <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="background: #f5f6f8;color: rgb(0,0,0);"><%= task.status == nil ? "To do" : task.status %></button>
-                      <div class="dropdown-menu">
-                      <%= link_to "To do", edit_task_path(id: task.id, status: "To do"), class: "dropdown-item", style: "background: #ffd200;" %>
-                      <%= link_to "In Progress", edit_task_path(id: task.id, status: "In Progress"), class: "dropdown-item", style: "background: #ffd200;" %>
-                      <%= link_to "For Review", edit_task_path(task.id, status: "For Review"), class: "dropdown-item", style: "background: #9acff5;" %>
-                      <%= link_to "Done", edit_task_path(task.id, status: "Done"), class: "dropdown-item", style: "background: #92de95;" %>
-                    </div>
-                    </div>
-                  </td>
-                  <td><%= task.label.tag %></td>
-                  <td><%= task.user.name %></td>
-                  <td><%= task.deadline.date %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-            </div>
-        </div>
-        <div id="modal-1" class="modal fade" role="dialog" tabindex="-1" style="position: fixed;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Enter Task Details</h4>
-                    <button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body" style="text-align: left;">
-                    <%= form_with(model: @task, url: tasks_path, class: "form") do |form| %>
-                    <div class="mb-3">
-                        <%= form.label :title, class: "form-label", style: "font-weight: bold;" %>
-                        <%= form.text_field :title, class: "form-control" %>
-                    </div>
-                    <div class="mb-3">
-                        <%= form.label :description, class: "form-label", style: "font-weight: bold;" %>
-                        <%= form.text_area :description, class: "form-control" %>
-                    </div>
-                    <div class="mb-3">
-                        <%= form.label :label_id, class: "form-label", style: "font-weight: bold;" %>
-                        <%= form.select :label_id, options_for_select(@labels.map { |label| [label.tag, label.id] }), {}, class: "form-select" %>
-                    </div>
-                    <div class="mb-3">
-                        <%= form.label :user_id, class: "form-label", style: "font-weight: bold;" %>
-                        <%= form.select :user_id, options_for_select(@users.map { |user| [user.name, user.id] }), {}, class: "form-select" %>
-                    </div>
-                    <div class="mb-3">
-                        <%= form.label :deadline, class: "form-label", style: "font-weight: bold;" %>
-                        <%= form.date_field :deadline, class: "form-control" %>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
-                <%= form.submit "Save", class: "btn btn-primary" %>
-                </div>
-                <% end %>
+  <h2 class="display-3 fw-bold mb-4" style="text-align: center;">My Tasks</h2>
+  <%= image_tag('illustrations/video-call.svg', class: "img-fluid", style: "width: 600;")  %>
+  <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal-1" style="margin-right: 18px;">Add Task</button><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal-2">Add Label</button>
+  <div class="filter">
+    <form><input placeholder="e.g For Review" /><br />
+      <select>
+        <option value>To do</option>
+        <option value>In Progress</option>
+        <option value>For Testing</option>
+        <option value>Done</option>
+      </select>
+      <select>
+      <% @labels.each do |label| %>
+        <option value="<%= label.tag %>"><%= label.tag %></option>
+      <% end %>
+      </select>
+      <select>
+        <option value>Deadline</option>
+      </select>
+      <select>
+          <option value>Member</option>
+          <option value>Task Leader</option>
+          <option value>Group Leader</option>
+      </select>
+    </form>
+  </div>
+  <div class="container">
+      <div class="table-responsive">
+      <table class="table">
+      <thead>
+        <tr>
+          <th style="width: 350px;">Action</th>
+          <th>Task Name</th>
+          <th>Status</th>
+          <th>Label</th>
+          <th>Assignee</th>
+          <th>Deadline</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tasks.each do |task| %>
+          <tr>
+            <td>
+              <div class="btn-group" role="group">
+                <a class="btn btn-primary" role="button" style="background: rgb(90,135,92);border-style: none;" href="super_user_tasks_show.html">Edit</a>
+                <button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;border-color: rgba(255,255,255,0);">Delete</button>
+              </div>
+            </td>
+            <td><%= link_to task.title, task_path(task.id), style: "text-decoration: none; color: inherit;"  %></td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="background: #f5f6f8;color: rgb(0,0,0);"><%= task.status == nil ? "To do" : task.status %></button>
+                <div class="dropdown-menu">
+                <%= link_to "To do", edit_task_path(id: task.id, status: "To do"), class: "dropdown-item", style: "background: #ffed99;" %>
+                <%= link_to "In Progress", edit_task_path(id: task.id, status: "In Progress"), class: "dropdown-item", style: "background: #ffd200;" %>
+                <%= link_to "For Review", edit_task_path(task.id, status: "For Review"), class: "dropdown-item", style: "background: #9acff5;" %>
+                <%= link_to "Done", edit_task_path(task.id, status: "Done"), class: "dropdown-item", style: "background: #92de95;" %>
+              </div>
+              </div>
+            </td>
+            <td><%= task.label.tag %></td>
+            <td><%= task.user.name %></td>
+            <td><%= task.deadline.date %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+      </div>
+  </div>
+  <div id="modal-1" class="modal fade" role="dialog" tabindex="-1" style="position: fixed;">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Enter Task Details</h4>
+              <button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body" style="text-align: left;">
+              <%= form_with(model: @task, url: tasks_path, class: "form") do |form| %>
+              <div class="mb-3">
+                  <%= form.label :title, class: "form-label", style: "font-weight: bold;" %>
+                  <%= form.text_field :title, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                  <%= form.label :description, class: "form-label", style: "font-weight: bold;" %>
+                  <%= form.text_area :description, class: "form-control" %>
+              </div>
+              <div class="mb-3">
+                  <%= form.label :label_id, class: "form-label", style: "font-weight: bold;" %>
+                  <%= form.select :label_id, options_for_select(@labels.map { |label| [label.tag, label.id] }), {}, class: "form-select" %>
+              </div>
+              <div class="mb-3">
+                  <%= form.label :user_id, class: "form-label", style: "font-weight: bold;" %>
+                  <%= form.select :user_id, options_for_select(@users.map { |user| [user.name, user.id] }), {}, class: "form-select" %>
+              </div>
+              <div class="mb-3">
+                  <%= form.label :deadline, class: "form-label", style: "font-weight: bold;" %>
+                  <%= form.date_field :deadline, class: "form-control" %>
+              </div>
+          </div>
+          <div class="modal-footer">
+          <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+          <%= form.submit "Save", class: "btn btn-primary" %>
+          </div>
+          <% end %>
 
-                </div>
-            </div>
-        </div>
+          </div>
+      </div>
+  </div>
 
-        <div id="modal-2" class="modal fade" role="dialog" tabindex="-1">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Add New Label</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body" style="text-align: left;"><label class="form-label" style="font-weight: bold;">Label Tag</label>
-                        <form><input class="form-control" type="text" /></form>
-                    </div>
-                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Save</button></div>
-                </div>
-            </div>
+  <div id="modal-2" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Label</h4>
+          <button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
         </div>
-    </section>
+        <div class="modal-body" style="text-align: left;">
+          <%= form_with(model: @label, url: labels_path, class: "form") do |form| %>
+            <div class="mb-3">
+              <%= form.label :tag, class: "form-label", style: "font-weight: bold;" %>
+              <%= form.text_field :tag, class: "form-control" %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :description, class: "form-label", style: "font-weight: bold;" %>
+              <%= form.text_area :description, class: "form-control" %>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+              <%= form.submit "Save", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
