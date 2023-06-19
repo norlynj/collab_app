@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: :create
+
   def index
     @users = User.all
     @labels = Label.all
@@ -11,14 +11,14 @@ class UsersController < ApplicationController
 
   # creates user using the permitted params
   def create
-    @user = User.new(user_params)
-    if @user.save
+    if create_user_with_credentials(user_params)
       # Handle successful user creation
       redirect_to users_path, notice: 'User was successfully created.'
     else
       # Handle validation errors
-      flash.now[:alert] = 'Failed to create user.'
+      p @user.errors.full_messages
       redirect_to users_path
+      flash.now[:alert] = 'Failed to create user.'
     end
   end
 
@@ -35,10 +35,17 @@ class UsersController < ApplicationController
     end
   end
 
+  # Creates a new user with the given name and email, and generates a random password
+  # Generates a random password
+  def create_user_with_credentials(user_params)
+    password = SecureRandom.alphanumeric(8)
+    User.create(name: user_params[:name], email: user_params[:email], password: password, role: user_params[:role], label_id: user_params[:label_id])
+  end
+
  # Permits the name, email, and password parameters for user creation and update
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :authenticity_token)
+    params.permit(:name, :email, :authenticity_token, :role, :label_id)
   end
 end

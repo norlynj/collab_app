@@ -19,14 +19,12 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'flash_messages', media: 'all', 'data-turbolinks-track': 'reload' %>
 
+
     <%= javascript_include_tag 'jquery' %>
     <%= javascript_include_tag 'popper' %>
     <%= javascript_include_tag 'bootstrap' %>
     <%= javascript_include_tag 'startup-modern.js' %>
 
-
-    <!-- JavaScript import map tags -->
-    <%= javascript_importmap_tags %>
   </head>
 
   <body>
@@ -64,12 +62,12 @@
     </div>
     </nav>
     <div id="flash-messages">
-        <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %> alert-dismissible fade show" role="alert">
-            <%= value %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <% end %>
+      <% flash.each do |key, value| %>
+      <div class="alert alert-<%= flash_class(key) %> alert-dismissible fade show" role="alert">
+        <%= value %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <% end %>
     </div>
     <%= yield %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -80,19 +78,6 @@
         new bootstrap.Alert(alert).close();
       });
     }, 3000); // Adjust the time (in milliseconds) for how long the flash messages should be displayed
-
-    function flash_class(key) {
-      switch (key) {
-        case 'notice':
-          return 'alert-success';
-        case 'alert':
-          return 'alert-danger';
-        case 'warning':
-          return 'alert-warning';
-        default:
-          return 'alert-info';
-      }
-    }
     </script>
     <footer style="background: rgb(228,220,220);">
         <div class="container py-4 py-lg-5">

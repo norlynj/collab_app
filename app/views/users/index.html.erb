@@ -41,7 +41,7 @@
             <button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body" style="text-align: left;">
-            <%= form_with(model: @user, url: users_path, class: "form") do |form| %>
+            <%= form_with(model: @user, url: users_path, method: :post, class: "form") do |form| %>
               <label class="form-label" style="font-weight: bold;">Name:</label>
               <%= form.text_field :name, class: "form-control" %>
 
@@ -49,7 +49,7 @@
               <%= form.email_field :email, class: "form-control" %>
 
               <label class="form-label" style="font-weight: bold;">Role:</label>
-              <%= form.select :role_id, options_for_select([["Group Leader", "group_leader"], ["Task Leader", "task_leader"], ["Member", "member"]]), {}, class: "form-select" %>
+              <%= form.select :role, options_for_select([ ["Member", "member"], ["Task Leader", "task_leader"], ["Group Leader", "group_leader"]]), {}, class: "form-select" %>
 
               <label class="form-label" style="font-weight: bold;">Label:</label>
               <%= form.select :label_id, options_for_select(@labels.map { |label| [label.tag, label.id] }), {}, class: "form-select" %>
@@ -58,7 +58,7 @@
             <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
             <%= form.submit "Save", class: "btn btn-primary active", data: { bs: { toggle: "modal", target: "#modal-3" } } %>
             <% end %>
-            </div>
+          </div>
         </div>
       </div>
     </div>
