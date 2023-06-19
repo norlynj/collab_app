@@ -48,8 +48,13 @@
                   </svg></a>
               <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Task ABCD due in 3 weeks</a><a class="dropdown-item" href="#"><span style="color: var(--bs-dropdown-link-hover-color); background-color: var(--bs-dropdown-link-hover-bg);">Task EFG due in 3 weeks</span></a><a class="dropdown-item" href="#"><span style="color: var(--bs-dropdown-link-hover-color); background-color: var(--bs-dropdown-link-hover-bg);">Task 1274KS  due in 3 weeks</span></a><a class="dropdown-item link-danger" href="#"></a></div>
           </div>
-          <div class="dropdown"><a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="--bs-primary: #24285b;--bs-primary-rgb: 36,40,91;"><i class="fa fa-user" style="color: #24285b;font-size: 27px;padding-bottom: 0px;"></i></a>
-              <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="super_user_user_index.html">User list</a><a class="dropdown-item" href="my_profile_show.html">My Profile</a><a class="dropdown-item link-danger" href="login.html">Sign Out</a></div>
+          <div class="dropdown">
+          <a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="--bs-primary: #24285b;--bs-primary-rgb: 36,40,91;"><i class="fa fa-user" style="color: #24285b;font-size: 27px;padding-bottom: 0px;"></i></a>
+              <div class="dropdown-menu dropdown-menu-end">
+              <%= link_to("User list", users_path, class: "dropdown-item") %>
+              <%= link_to("My Profile", users_path, class: "dropdown-item") %>
+              <%= link_to("Sign Out", users_path, class: "dropdown-item") %>
+              </div>
           </div>
       </div>
   </div>

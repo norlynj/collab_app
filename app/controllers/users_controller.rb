@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 
+  def index
+  end
+
   # creates user using the permitted params
   def create
     @user = User.new(user_params)
