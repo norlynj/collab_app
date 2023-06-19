@@ -24,15 +24,15 @@ class TasksController < ApplicationController
   end
 
   # Updates an existing task
-  def update
+  def edit
     @task = Task.find(params[:id])
-    if @task.update(task_params)
+    if @task.update(status: params[:status])
       # Handle successful task update
-      redirect_to @task, notice: 'Task was successfully updated.'
+      p "===========updated============"
+      redirect_to tasks_path, notice: 'Task was successfully updated.'
     else
       # Handle validation errors
       flash.now[:alert] = 'Failed to update task.'
-      render 'edit'
     end
   end
 
@@ -40,6 +40,6 @@ class TasksController < ApplicationController
 
   # Permits the title and description parameters for task creation and update
   def task_params
-    params.permit(:title, :description, :label_id, :user_id, :deadline, :authenticity_token, :commit, :id)
+    params.permit(:title, :description, :label_id, :user_id, :deadline, :authenticity_token, :commit, :id, :status)
   end
 end

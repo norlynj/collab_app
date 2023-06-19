@@ -42,12 +42,13 @@
                   <td><%= link_to task.title, task_path(task.id), style: "text-decoration: none; color: inherit;"  %></td>
                   <td>
                     <div class="dropdown">
-                      <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="background: #f5f6f8;color: rgb(0,0,0);">To-do</button>
+                      <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="background: #f5f6f8;color: rgb(0,0,0);"><%= task.status == nil ? "To do" : task.status %></button>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#" style="background: #ffd200;">In Progress</a>
-                        <a class="dropdown-item" href="#" style="background: #9acff5;">For Review</a>
-                        <a class="dropdown-item" href="#" style="background: #92de95;">Done</a>
-                      </div>
+                      <%= link_to "To do", edit_task_path(id: task.id, status: "To do"), class: "dropdown-item", style: "background: #ffd200;" %>
+                      <%= link_to "In Progress", edit_task_path(id: task.id, status: "In Progress"), class: "dropdown-item", style: "background: #ffd200;" %>
+                      <%= link_to "For Review", edit_task_path(task.id, status: "For Review"), class: "dropdown-item", style: "background: #9acff5;" %>
+                      <%= link_to "Done", edit_task_path(task.id, status: "Done"), class: "dropdown-item", style: "background: #92de95;" %>
+                    </div>
                     </div>
                   </td>
                   <td><%= task.label.tag %></td>
