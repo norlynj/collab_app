@@ -17,16 +17,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true, length: { minimum: 6 }
 
-  attr_accessor :password
-
-  before_save :encrypt_password
 
   enum role: { group_leader: 'group_leader', task_leader: 'task_leader', member: 'member' }
-
-  # Encrypts the user's password before saving to the database
-  def encrypt_password
-    self.password_digest = Password.create(password)
-  end
 
   # Authenticates the user's password
   def authenticate(password)
