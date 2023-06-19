@@ -1,6 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
   belongs_to :label
+  has_one :deadline
   has_many :comments
   has_many :update_logs
 

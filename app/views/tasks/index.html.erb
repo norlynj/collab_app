@@ -19,45 +19,44 @@
         </div>
         <div class="container">
             <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th style="width: 350px;">Action</th>
-                            <th>Task Name</th>
-                            <th>Status</th>
-                            <th>Label</th>
-                            <th>Assignee</th>
-                            <th>Deadline</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="btn-group" role="group"><a class="btn btn-primary" role="button" style="background: rgb(90,135,92);border-style: none;" href="super_user_tasks_show.html">Edit</a><button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;border-color: rgba(255,255,255,0);">Delete</button></div>
-                            </td>
-                            <td>Work on Concept</td>
-                            <td>
-                                <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="background: #f5f6f8;color: rgb(0,0,0);">To-do </button>
-                                    <div class="dropdown-menu"><a class="dropdown-item" href="#" style="background: #ffd200;">In Progress</a><a class="dropdown-item" href="#" style="background: #9acff5;">For Review</a><a class="dropdown-item" href="#" style="background: #92de95;">Done</a></div>
-                                </div>
-                            </td>
-                            <td>CE</td>
-                            <td>Juan Dela Cruz</td>
-                            <td>Cell 3</td>
-                        </tr>
-                        <tr>
-                            <td><button class="btn btn-primary" type="button" style="background: rgb(90,135,92);border-style: none;">Edit</button><button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;">Delete</button></td>
-                            <td>Draw Diagrams</td>
-                            <td>
-                                <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="background: #f5f6f8;color: rgb(0,0,0);">To-do </button>
-                                    <div class="dropdown-menu"><a class="dropdown-item" href="#" style="background: #ffd200;">In Progress</a><a class="dropdown-item" href="#" style="background: #9acff5;">For Review</a><a class="dropdown-item" href="#" style="background: #92de95;">Done</a></div>
-                                </div>
-                            </td>
-                            <td>DE</td>
-                            <td>John Doe</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <table class="table">
+            <thead>
+              <tr>
+                <th style="width: 350px;">Action</th>
+                <th>Task Name</th>
+                <th>Status</th>
+                <th>Label</th>
+                <th>Assignee</th>
+                <th>Deadline</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @tasks.each do |task| %>
+                <tr>
+                  <td>
+                    <div class="btn-group" role="group">
+                      <a class="btn btn-primary" role="button" style="background: rgb(90,135,92);border-style: none;" href="super_user_tasks_show.html">Edit</a>
+                      <button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;border-color: rgba(255,255,255,0);">Delete</button>
+                    </div>
+                  </td>
+                  <td><%= task.title %></td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="background: #f5f6f8;color: rgb(0,0,0);">To-do</button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" style="background: #ffd200;">In Progress</a>
+                        <a class="dropdown-item" href="#" style="background: #9acff5;">For Review</a>
+                        <a class="dropdown-item" href="#" style="background: #92de95;">Done</a>
+                      </div>
+                    </div>
+                  </td>
+                  <td><%= task.label.tag %></td>
+                  <td><%= task.user.name %></td>
+                  <td><%= task.deadline.date %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
             </div>
         </div>
         <div id="modal-1" class="modal fade" role="dialog" tabindex="-1" style="position: fixed;">

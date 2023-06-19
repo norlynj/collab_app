@@ -4,72 +4,34 @@
     <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modal-2">Add Users</button>
     <div class="container">
         <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th style="width: 300px;">Action</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Label</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="btn-group" role="group"><a class="btn btn-primary" role="button" style="background: rgb(90,135,92);border-style: none;" href="my_profile_show.html">Edit</a><button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;border-color: rgba(255,255,255,0);">Delete</button></div>
-                        </td>
-                        <td>JK Ana</td>
-                        <td>jk@ex.ph</td>
-                        <td>Task Leader</td>
-                        <td>FE</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="btn-group" role="group"><a class="btn btn-primary" role="button" style="background: rgb(90,135,92);border-style: none;" href="my_profile_show.html">Edit</a><button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;border-color: rgba(255,255,255,0);">Delete</button></div>
-                        </td>
-                        <td>JA Ana</td>
-                        <td>ja@ex.ph</td>
-                        <td>Member</td>
-                        <td>FE</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="btn-group" role="group"><a class="btn btn-primary" role="button" style="background: rgb(90,135,92);border-style: none;" href="my_profile_show.html">Edit</a><button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;border-color: rgba(255,255,255,0);">Delete</button></div>
-                        </td>
-                        <td>JRAna</td>
-                        <td>jr@ex.ph</td>
-                        <td>Member</td>
-                        <td>FE</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="btn-group" role="group"><a class="btn btn-primary" role="button" style="background: rgb(90,135,92);border-style: none;" href="my_profile_show.html">Edit</a><button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;border-color: rgba(255,255,255,0);">Delete</button></div>
-                        </td>
-                        <td>JCAna</td>
-                        <td>jc@ex.ph</td>
-                        <td>Member</td>
-                        <td>FE</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="btn-group" role="group"><a class="btn btn-primary" role="button" style="background: rgb(90,135,92);border-style: none;" href="my_profile_show.html">Edit</a><button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;border-color: rgba(255,255,255,0);">Delete</button></div>
-                        </td>
-                        <td>JBAna</td>
-                        <td>jb@ex.ph</td>
-                        <td>Member</td>
-                        <td>FE</td>
-                    </tr>
-                    <tr>
-                        <td><button class="btn btn-primary" type="button" style="background: rgb(90,135,92);border-style: none;">Edit</button><button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;">Delete</button></td>
-                        <td>Jane Doe</td>
-                        <td>jd@ex.ph</td>
-                        <td>Member</td>
-                        <td>LE</td>
-                    </tr>
-                    <tr></tr>
-                </tbody>
-            </table>
+        <table class="table">
+        <thead>
+          <tr>
+            <th style="width: 300px;">Action</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Label</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td>
+                <div class="btn-group" role="group">
+                  <a class="btn btn-primary" role="button" style="background: rgb(90,135,92);border-style: none;" href="my_profile_show.html">Edit</a>
+                  <button class="btn btn-primary" type="button" style="background: rgb(126,81,86);border-style: none;border-color: rgba(255,255,255,0);">Delete</button>
+                </div>
+              </td>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.role %></td>
+              <td>FE</td> <!-- Assuming the label is hardcoded as "FE" -->
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      
         </div>
     </div>
     <div id="modal-2" class="modal fade" role="dialog" tabindex="-1">
