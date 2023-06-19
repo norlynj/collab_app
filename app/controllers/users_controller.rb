@@ -11,14 +11,17 @@ class UsersController < ApplicationController
 
   # creates user using the permitted params
   def create
-    if create_user_with_credentials(user_params)
+    @password = generate_password
+    @user = User.new(name: user_params[:name], email: user_params[:email], password: @password, role: user_params[:role], label_id: user_params[:label_id])
+    if @user.save
       # Handle successful user creation
-      redirect_to users_path, notice: 'User was successfully created.'
+      respond_to do |format|
+        format.html { redirect_to users_path, notice: 'User was successfully created.' }
+        format.js # Renders create.js.erb
+      end
     else
       # Handle validation errors
-      p @user.errors.full_messages
-      redirect_to users_path
-      flash.now[:alert] = 'Failed to create user.'
+      redirect_to users_path, alert: 'Failed to create user.'
     end
   end
 
@@ -35,16 +38,14 @@ class UsersController < ApplicationController
     end
   end
 
-  # Creates a new user with the given name and email, and generates a random password
-  # Generates a random password
-  def create_user_with_credentials(user_params)
-    password = SecureRandom.alphanumeric(8)
-    User.create(name: user_params[:name], email: user_params[:email], password: password, role: user_params[:role], label_id: user_params[:label_id])
+  private
+
+  # Generate a secure random password using rails helper
+  def generate_password
+    @password = SecureRandom.alphanumeric(8)
   end
 
  # Permits the name, email, and password parameters for user creation and update
-  private
-
   def user_params
     params.permit(:name, :email, :authenticity_token, :role, :label_id)
   end
