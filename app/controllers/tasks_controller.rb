@@ -2,13 +2,19 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   def index
     @tasks = Task.all
+    @labels = Label.all
+    @users = User.where.not(role: "group_leader")
   end
 
+  def show
+    @task = Task.find(params[:id])
+  end
   # Creates a new task
   def create
-    @task = Task.new(task_params)
+    @task = Task.new(title: task_params[:title], description: task_params[:description], label_id: task_params[:label_id], user_id: task_params[:user_id])
     if @task.save
-      # Handle successful task creation
+      # Create deadline and Handle successful task creation
+      Deadline.create(date: Date.parse(task_params[:deadline]), task_id: @task.id)
       redirect_to @task, notice: 'Task was successfully created.'
     else
       # Handle validation errors
@@ -34,6 +40,6 @@ class TasksController < ApplicationController
 
   # Permits the title and description parameters for task creation and update
   def task_params
-    params.require(:task).permit(:title, :description)
+    params.permit(:title, :description, :label_id, :user_id, :deadline, :authenticity_token, :commit, :id)
   end
 end

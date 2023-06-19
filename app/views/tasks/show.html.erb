@@ -1,43 +1,42 @@
-    
-    <section class="py-5 mt-5" style="text-align: center;">
-        <h2 class="display-3 fw-bold mb-4" style="text-align: center;">Task name</h2>
-        <div class="row" style="text-align: center;">
-            <div class="col" style="text-align: right;width: 600px;">
-            <%= image_tag('illustrations/video-call.svg', class: "img-fluid", style: "width: 600;")  %>
-            <div class="col">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 style="text-align: left;font-size: 20px;"><strong>Description</strong>: </h1>
-                            <h1 style="text-align: left;font-size: 20px;"><strong>Label</strong>:</h1>
-                            <h1 style="text-align: left;font-size: 20px;"><strong>Deadline</strong>:</h1>
-                            <h1 style="text-align: left;font-size: 20px;"><strong>Overdue</strong>:</h1>
-                            <h1 style="text-align: left;font-size: 20px;"><strong>Status</strong>:</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 style="text-align: left;font-size: 20px;"><strong>Task Update</strong>: <br /><br /><br /><br /><br /></h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 style="text-align: left;font-size: 20px;"><strong>Task Comments:</strong><br /><br /><br /><br /><br /><br /></h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12"><textarea style="height: 100px;width: 500px;"></textarea></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12"><a class="btn btn-primary" role="button" href="super_user_tasks_index.html">Add Comment</a></div>
+<section class="py-5 mt-5" style="text-align: center;">
+    <h2 class="display-3 fw-bold mb-4" style="text-align: center;"> <%= @task.title %> </h2>
+    <div class="row" style="text-align: center;">
+        <div class="col" style="text-align: right;width: 600px;">
+            <%= image_tag('illustrations/video-call.svg', class: "img-fluid", style: "width: 600;") %>
+        </div>
+        <div class="col">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 style="text-align: left;font-size: 20px;"><strong>Description</strong>: <%= @task.description %></h1>
+                        <h1 style="text-align: left;font-size: 20px;"><strong>Label</strong>: <%= @task.label.tag %></h1>
+                        <h1 style="text-align: left;font-size: 20px;"><strong>Deadline</strong>: <%= @task.deadline.date %></h1>
+                        <h1 style="text-align: left;font-size: 20px;"><strong>Overdue</strong>: N</h1>
+                        <h1 style="text-align: left;font-size: 20px;"><strong>Status</strong>: <%= @task.status == nil ? "Not Started" : @task.status %></h1>
                     </div>
                 </div>
             </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 style="text-align: left;font-size: 20px;"><strong>Task Update</strong>: <%= @task.update_logs.last&.note %><br /><br /><br /></h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 style="text-align: left;font-size: 20px;"><strong>Task Comments</strong>: <%= @task.comments.last&.note %><br /><br /><br /><br /><br /><br /></h1>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12"><textarea style="height: 100px;width: 500px;"></textarea></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12"><a class="btn btn-primary" role="button" href="super_user_tasks_index.html">Add Comment</a></div>
+                </div>
+            </div>
         </div>
-        <div class="btn-group" role="group"></div>
-    </section>
-    
+    </div>
+    <div class="btn-group" role="group"></div>
+</section>
