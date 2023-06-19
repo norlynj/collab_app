@@ -45,9 +45,15 @@ gem "bootsnap", require: false
 # bootstrap
 gem 'bootstrap', '~> 5.1', '>= 5.1.3'
 
+# jquery
+gem 'jquery-rails'
+
 # authentication
 gem 'devise'
 
+
+# icons
+gem "font-awesome-rails"
 
 # Use Sass to process CSS
 # gem "sassc-rails"
