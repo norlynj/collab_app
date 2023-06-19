@@ -1,23 +1,36 @@
 <section class="py-5 mt-5" style="text-align: center;">
-    <h2 class="display-3 fw-bold mb-4" style="text-align: center;">Juan Dela Cruz</h2>
-    <div class="row" style="text-align: center;">
-        <div class="col-xxl-6" style="text-align: right;width: 600px;">
-        <%= image_tag('illustrations/video-call.svg', class: "img-fluid", style: "width: 500;")  %>
-        </div>
-        <div class="col">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xxl-8">
-                        <form style="text-align: left;font-weight: bold;margin-right: 110px;"><label class="form-label" style="text-align: left;">Name:</label><input class="form-control" type="text" /><label class="form-label" style="text-align: left;">Email:</label><input class="form-control" type="text" /><label class="form-label" style="text-align: left;">Password:</label><input class="form-control" type="text" /><label class="form-label" style="text-align: left;">Confirm Password:</label><input class="form-control" type="text" /></form>
+  <h2 class="display-3 fw-bold mb-4" style="text-align: center;"><%= @user.name %></h2>
+  <div class="row" style="text-align: center;">
+    <div class="col-xxl-6" style="text-align: right;width: 600px;">
+      <%= image_tag('illustrations/video-call.svg', class: "img-fluid", style: "width: 500;") %>
+    </div>
+    <div class="col">
+    <div class="container">
+        <div class="row">
+            <div class="col-xxl-8">
+                <%= form_with(model: @user, url: user_path(@user), method: :put, local: true, html: { style: "text-align: left;font-weight: bold;margin-right: 110px;" }) do |form| %>
+                    <div class="mb-4">
+                    <%= form.label :name, class: "form-label", style: "text-align: left;" %>
+                    <%= form.text_field :name, class: "form-control" %>
                     </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12" style="text-align: left;"><a class="btn btn-primary" role="button" style="margin-top: 20px;" href="super_user_user_index.html">Update Profile</a></div>
-                </div>
+                    <div class="mb-4">
+                    <%= form.label :email, class: "form-label", style: "text-align: left;" %>
+                    <%= form.text_field :email, class: "form-control" %>
+                    </div>
+                    <div class="mb-4">
+                    <%= form.label :password, class: "form-label", style: "text-align: left;" %>
+                    <%= form.password_field :password, class: "form-control" %>
+                    </div>
+                    <div class="mb-4">
+                    <%= form.label :password_confirmation, "Confirm Password", class: "form-label", style: "text-align: left;" %>
+                    <%= form.password_field :password_confirmation, class: "form-control" %>
+                    </div>
+                    <div class="form-group">
+                    <%= form.submit "Update Profile", class: "btn btn-primary", style: "margin-top: 20px;" %>
+                    </div>
+                <% end %>
             </div>
         </div>
     </div>
-    <div class="btn-group" role="group"></div>
+  </div>
 </section>

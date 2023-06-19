@@ -5,6 +5,10 @@ class UsersController < ApplicationController
     @labels = Label.all
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   # creates user using the permitted params
   def create
     @user = User.new(user_params)

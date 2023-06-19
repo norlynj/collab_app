@@ -50,7 +50,7 @@
           <a class="dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="--bs-primary: #24285b;--bs-primary-rgb: 36,40,91;"><i class="fa fa-user" style="color: #24285b;font-size: 27px;padding-bottom: 0px;"></i></a>
               <div class="dropdown-menu dropdown-menu-end">
               <%= link_to("User list", users_path, class: "dropdown-item") %>
-              <%= link_to("My Profile", users_path, class: "dropdown-item") %>
+              <%= link_to("My Profile", user_path(current_user.id), class: "dropdown-item") %>
               <%= link_to("Sign Out", root_path, class: "dropdown-item") %>
               </div>
           </div>
