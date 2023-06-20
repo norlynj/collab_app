@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(name: user_params[:name], email: user_params[:email], password: @password, role: user_params[:role], label_id: user_params[:label_id])
     if @user.save
       # Handle successful user creation
-      format.html { redirect_to users_path, notice: 'User was successfully created.' }
+      redirect_to users_path, notice: 'User was successfully created.'
     else
       # Handle validation errors
       redirect_to users_path, alert: 'Failed to create user.'
