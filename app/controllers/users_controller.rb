@@ -15,10 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(name: user_params[:name], email: user_params[:email], password: @password, role: user_params[:role], label_id: user_params[:label_id])
     if @user.save
       # Handle successful user creation
-      respond_to do |format|
-        format.html { redirect_to users_path, notice: 'User was successfully created.' }
-        format.js # Renders create.js.erb
-      end
+      format.html { redirect_to users_path, notice: 'User was successfully created.' }
     else
       # Handle validation errors
       redirect_to users_path, alert: 'Failed to create user.'
@@ -36,6 +33,12 @@ class UsersController < ApplicationController
       flash.now[:alert] = 'Failed to update user.'
       redirect_to users_path
     end
+  end
+
+  # deletes a user
+  def destroy
+    User.find(params[:id]).destroy
+    redirect_to users_path, notice: 'User successfully deleted.'
   end
 
   private
