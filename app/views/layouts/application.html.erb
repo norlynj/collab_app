@@ -55,7 +55,7 @@
                 <div class="dropdown-menu dropdown-menu-end">
                 <%= link_to("User list", users_path, class: "dropdown-item") %>
                 <% if current_user %>
-                     link_to("My Profile", user_path(current_user.id), class: "dropdown-item") %>
+                     <% link_to("My Profile", user_path(current_user.id), class: "dropdown-item") %>
                 <% end %>
                 <%= link_to("Sign Out", root_path, class: "dropdown-item") %>
                 </div>
