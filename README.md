@@ -1,24 +1,5 @@
-# README
+# Collab (WIP)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+https://github.com/norlynj/collab_app/assets/80614435/8e894c6d-1c57-457e-bfab-d7ca08cf040c
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
